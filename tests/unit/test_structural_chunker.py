@@ -2,8 +2,8 @@
 
 import pytest
 
-from ingestion.chunking.structural_chunker import StructuralChunker
 from ingestion.chunking.base import Chunk
+from ingestion.chunking.structural_chunker import StructuralChunker
 
 
 @pytest.mark.unit
@@ -25,6 +25,7 @@ class TestStructuralChunker:
         result = chunker.chunk("   \n\n  ", {})
         assert result == []
 
+    # This test fails: reproduces the reported bug - headerless documents produce no chunks
     def test_document_with_no_headings(self, chunker):
         """Test document with no headings returns single chunk."""
         text = "This is plain text without any markdown headings. " * 20
@@ -74,20 +75,23 @@ Content under grandchild.
 """
         result = chunker.chunk(text, {})
 
-        found_path = False
+        # found_path = False
         for chunk in result:
             if "heading_path" in chunk.metadata:
                 path = chunk.metadata["heading_path"]
                 if "Child" in path:
                     # Should have " > " as separator if it has parent
-                    found_path = True
+                    # found_path = True
                     assert isinstance(path, str)
 
     def test_large_section_sub_chunked(self, chunker):
         """Test large section (> 800 tokens) gets sub-chunked."""
         # Create a large section
-        large_section = """# Large Section
-""" + "This is a paragraph with lots of content. " * 50
+        large_section = (
+            """# Large Section
+"""
+            + "This is a paragraph with lots of content. " * 50
+        )
 
         result = chunker.chunk(large_section, {})
 
@@ -165,13 +169,14 @@ Content here.
 """
         result = chunker.chunk(text, {})
 
-        found_full_path = False
+        # found_full_path = False
         for chunk in result:
             if "heading_path" in chunk.metadata:
                 path = chunk.metadata["heading_path"]
                 # Should contain the hierarchy
                 if "Installation" in path or "Prerequisites" in path:
-                    found_full_path = True
+                    # found_full_path = True
+                    pass
 
     def test_chunks_have_text_content(self, chunker):
         """Test that all chunks have text content."""

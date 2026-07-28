@@ -19,14 +19,14 @@ This issue is about the system not considering documents that do not contain any
 
 ## Week 8 — Reproduction & solution planning
 
-**Reproduction commit link:** [link to commit documenting the reproduced issue]
+**Reproduction commit link:** 
+https://github.com/harinis122/pathreview/commit/a0fa237fad74f14f838d522302bb80a37b0b38e6
 
 **Reproduction summary:**
-[1–2 sentences: How did you reproduce the issue? What did you observe?]
+I reproduced the issue by going through the structural_chunker test cases (in test_structural_chunker.py) and finding a relevant test case which tests functionality of program with headingless documents. Since the test case was already there and failed because the program currently ignores headerless documents, I added a comment above that test case to indicate this is the reproduced issue.
 
-**PLAN.md link:** [link to PLAN.md in your fork]
-
-**Walkthrough video (recommended):** [link to your Loom video, ≤2 min — recommended, not graded]
+**PLAN.md link:** 
+https://github.com/harinis122/pathreview/blob/fix/149-chunker-drops-docs-without-heading/PLAN.md
 
 **Blockers or open questions:**
-[Anything you're still uncertain about going into Week 9, or leave blank]
+How can we properly test the functionality of the program and ensure our issue is properly fixed if the program cannot be run due to multiple other issues present?

@@ -52,14 +52,14 @@ N/A
 
 **PR link:** [link to your submitted pull request]
 
-**Branch:** [the branch name you worked on, e.g. `fix/123-short-description`]
+**Branch:** fix/149-chunker-drops-docs-without-heading
 
 **What you built:**
-[1–3 sentences summarizing what your fix does and how it works]
+I fixed `_extract_sections()` in `ingestion/chunking/structural_chunker.py` so it buffers and saves content lines regardless of whether a heading has been seen yet, using an empty heading path (`""`) and level `0` for text with no heading context. This means headerless documents (and any leading text before a document's first heading) are now preserved as chunks instead of being silently dropped, and they automatically flow through the existing size-based logic in `chunk()` — short headerless docs become a single chunk, long ones get sub-chunked via `SemanticChunker`, just like oversized headed sections already did.
 
 **Tests added or updated:**
-[Which test files did you touch? What do they cover?]
+I updated `tests/unit/test_structural_chunker.py`: removed the stale "this test fails" comment above `test_document_with_no_headings` now that it passes, and added `test_short_headerless_document_single_chunk`, `test_long_headerless_document_sub_chunked`, and `test_content_before_first_heading_preserved` to cover a short headerless doc, a long headerless doc that triggers semantic sub-chunking, and text appearing before a document's first heading.
 
-**Self-review confirmation:** [ ] make check passes  [ ] make test-unit passes
+**Self-review confirmation:** [X] make check passes  [X] make test-unit passes
 
-**Draft PR feedback received from:** [name or Slack handle, or "none"]
+**Draft PR feedback received from:** none

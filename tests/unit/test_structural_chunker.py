@@ -24,6 +24,7 @@ class TestStructuralChunker:
         """Test that whitespace-only input returns empty list."""
         result = chunker.chunk("   \n\n  ", {})
         assert result == []
+
     # these test cases test the behavior of the StructuralChunker class, ensuring it correctly handles various markdown structures, heading levels, and content scenarios, with a focus on handling documents with missing headings.
     def test_document_with_no_headings(self, chunker):
         """Test document with no headings returns single chunk."""

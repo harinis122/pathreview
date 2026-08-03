@@ -25,7 +25,6 @@ class TestStructuralChunker:
         result = chunker.chunk("   \n\n  ", {})
         assert result == []
 
-    # This test fails: reproduces the reported bug - headerless documents produce no chunks
     def test_document_with_no_headings(self, chunker):
         """Test document with no headings returns single chunk."""
         text = "This is plain text without any markdown headings. " * 20
@@ -34,6 +33,35 @@ class TestStructuralChunker:
         assert len(result) >= 1
         assert isinstance(result[0], Chunk)
         assert all(isinstance(c, Chunk) for c in result)
+
+    def test_short_headerless_document_single_chunk(self, chunker):
+        """Test a short headerless document produces one chunk with heading_level 0."""
+        text = "Just plain text, no headings at all."
+        result = chunker.chunk(text, {"source": "test"})
+
+        assert len(result) == 1
+        assert result[0].text.strip() == text
+        assert result[0].metadata["heading_level"] == 0
+        assert result[0].metadata["heading_path"] == ""
+
+    def test_long_headerless_document_sub_chunked(self, chunker):
+        """Test a long headerless document is sub-chunked via the semantic chunker."""
+        text = "This is a paragraph with lots of content. " * 150
+        result = chunker.chunk(text, {"source": "test"})
+
+        assert len(result) > 1
+        assert all(isinstance(c, Chunk) for c in result)
+
+    def test_content_before_first_heading_preserved(self, chunker):
+        """Test that leading content before the first heading is not dropped."""
+        text = """This is intro content before any heading.
+
+# Title
+Content under title.
+"""
+        result = chunker.chunk(text, {"source": "test"})
+
+        assert any("intro content" in c.text for c in result)
 
     def test_document_with_nested_headings(self, chunker):
         """Test document with nested headings preserves heading_path."""

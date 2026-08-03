@@ -50,7 +50,7 @@ N/A
 
 ### Check-in 2 (end of week)
 
-**PR link:** [link to your submitted pull request]
+**PR link:** https://github.com/harinis122/pathreview/pull/1
 
 **Branch:** fix/149-chunker-drops-docs-without-heading
 

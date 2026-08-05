@@ -63,3 +63,39 @@ I updated `tests/unit/test_structural_chunker.py`: removed the stale "this test 
 **Self-review confirmation:** [X] make check passes  [X] make test-unit passes
 
 **Draft PR feedback received from:** none
+
+
+
+## Week 10 — Iteration & reflection
+
+### Reviewer feedback
+
+**Feedback received:** [ ] Yes  [X] No — still awaiting review
+
+**Summary of feedback:**
+N/A: no reviews
+
+**How you responded:**
+N/A: no reviews
+
+
+---
+
+### Reflection
+
+**What was harder than you expected?**
+[Be specific — what part of the process, codebase, or workflow
+surprised you?]
+Understanding the codebase and figuring out what the bug was was the hardest part for me. I found it a bit difficult to navigate the codebase, figure out where each logic/test case was, and run the program. This surprised me, as writing code was definitely the easier part.
+
+**What did you learn about working in a large codebase?**
+I learned that working in a large codebase is much different from building my own project, but one is not necessarily harder or easier than the other. For large codebases, I think the most difficult part is understanding the codebase to ensure you only change the part that needs change, and to avoid unexpected side effects. However, when building your own project, the tough part is making sure the system design is solid, and understanding what problem the project should solve.
+
+**How did AI tools help — and where did they fall short?**
+AI tools were very helpful when trying to understand the codebase as a whole because it summarizes the function of each part/each file really well. I relied on AI tools to help me quickly understand what was going on in the code base and to figure out where my issue was occuring in the codebase. Without AI it would have taken me significantly longer to figure this out. However, AI tools generally fell short when exactly pinpointing the issue and understanding exactly what to fix. Although I did use AI tools to fix my issue, I did have to prompt the AI well and explicitly specify what changes it should make (nothing more), and I do not think the fix would have been successful if I did not prompt it well.
+
+**What would you do differently if you started over?**
+I think my project went pretty well and I don't think there is anything in particular I would do differently. However, if I were to restart, I would have picked a harder issue to work on since the issue I picked was a bit too easy.
+
+**What are you most proud of from this module?**
+I am proud that I learned how to use AI efficiently to understand the codebase but did not rely on it to do the work entirely for me. I used AI to understand the codebase and figure out the general area of my issue and then pinpointed the issue myself, and prompted AI to fix the issue. I like that I did the important thinking myself and used AI for more repetitive, manual tasks!
